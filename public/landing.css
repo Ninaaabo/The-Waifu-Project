@@ -1,0 +1,15 @@
+.welcome-label{
+    color: #d82502;
+    font-size: 1.5rem;
+}
+
+.title-label{
+    font-size: 2rem;
+}
+
+.landing-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+    margin-top: 10vh;
+}

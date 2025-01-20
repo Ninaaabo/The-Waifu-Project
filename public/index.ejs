@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Who's that 2D girl?</title>
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+</head>
+
+<body>
+  <div class="flex-container">
+    <div class="level-label">Level <%=level%></div>
+    <div>her name is <%=name %></div>
+    <div class="title-label">What is this 2D girl's name?</div>
+    <div class="parent-heart">
+        <% for(var i = 0; i < lifeLeft; i++){
+          %>
+          <img src="images/full-heart.png" alt="Full heart" class="heart"/>
+          <%
+        } 
+        for(var i = lifeLeft; i < originalLifeLeft; i++){
+          %>
+          <img src="images/empty-heart.png" alt="empty heart" class="heart"/>
+          <%
+        } %>
+    </div>
+
+    <div><img src = "<%= imgSrc %>"></div>
+    <div class="guess"><% for(letter of guess){ if(letter === " "){%> &nbsp;&nbsp;&nbsp; <%} else{ %> <%= letter %> <%}}%></div>
+    <% 
+      var lettersLine1 = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
+      var lettersLine2 = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+      var lettersLine3 = ["z", "x", "c", "v", "b", "n", "m"];
+      var lettersLine = [lettersLine1, lettersLine2, lettersLine3];
+    %>
+    
+
+    <form action="/guessing" method="POST" class="buttons">
+      <div class="key-container">
+      <% 
+        for(letterLine of lettersLine){
+          %> <div class="key-line"> <%
+          for(letter of letterLine){
+            %>     
+            <button type="submit" value= "<%= letter %>" name="choice" class="letter" id="<%= letter %>" <% if (chosenLetters.includes(letter)) { %> disabled <%} %>><%= letter %></button>
+            <%
+          }
+          %> </div> <%
+        }
+      %>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  window.addEventListener('load', () => {
+    if (locals.scrollTo) {
+      window.scrollTo(0, document.body.scrollHeight); 
+    }
+    });
+  </script>
+
+  <script src="button.js" charset="utf-8">
+  </script>
+
+</body>
+
+</html>
