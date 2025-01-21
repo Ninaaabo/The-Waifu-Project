@@ -24,33 +24,7 @@ app.get("/", (req, res) =>{
   res.render(dir + "/public/landing.ejs");
 })
 
-app.get("/difficulty", async(req, res) =>{
-  try{
-    const response = await axios.get(url, { headers: {
-      Authorization: "ODA1NzE1NjIwNzkxOTc1OTc2.MTczNzI1MDk0MQ--.42cd6a9d2e",
-    } });
-    if(lastClear){
-      level++;
-      lastClear = false;
-    }
-    else level = 1;
-    chosenLetters = [];
-    imgSrc = response.data.image.large;
-    name = response.data.name.full;
-    guess = new Array(name.length).fill("_");
-    lifeLeft = originalLifeLeft;
-    console.log("Hello");
-    console.log(response.data.media.nodes);
-    for(var i = 0; i < name.length; i++){
-      if (name.toLowerCase().charCodeAt(i) < 97 || name.toLowerCase().charCodeAt(i) > 122) guess [i] = name[i];
-    }
-    res.render(dir + "/public/index.ejs", {name, imgSrc, guess, chosenLetters, lifeLeft, level, originalLifeLeft});
-    console.log(response.data);
-  }
-  catch (err) {
-    throw new Error(err.message);
-  }
-})
+
 
 app.post("/difficulty", async(req, res) =>{
   if(req.body.choice === "casual") originalLifeLeft = 15;

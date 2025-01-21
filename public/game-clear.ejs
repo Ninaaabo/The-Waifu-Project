@@ -14,7 +14,9 @@
 
     <div class="landing-container">
         <div class="title-label">You got it, her name is <span class="red"> <%= name%></span></div>
-        <a href="http://localhost:3000/difficulty"> <button>Next Level</button></a>
+        <form action="/difficulty" method="POST" class="buttons">
+            <button type="submit">NEXT LEVEL</button>
+        </form>
     </div>
 </body>
 </html>
