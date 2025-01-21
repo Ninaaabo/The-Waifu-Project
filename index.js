@@ -24,8 +24,6 @@ app.get("/", (req, res) =>{
   res.render(dir + "/public/landing.ejs");
 })
 
-
-
 app.post("/difficulty", async(req, res) =>{
   if(req.body.choice === "casual") originalLifeLeft = 15;
   if(req.body.choice === "lover") originalLifeLeft = 10;
@@ -35,6 +33,7 @@ app.post("/difficulty", async(req, res) =>{
     const response = await axios.get(url, { headers: {
       Authorization: "ODA1NzE1NjIwNzkxOTc1OTc2.MTczNzI1MDk0MQ--.42cd6a9d2e",
     } });
+    
     if(lastClear){
       level++;
       lastClear = false;

@@ -9,24 +9,19 @@
 
 <body>
   <div class="flex-container">
+
+
+    <div id="charName" data="<%= name%>"></div>
+    <div id="difficulty" data = "<%=difficulty%>"></div>
+
     <div class="level-label">Level <%=level%></div>
-    <!-- <div>her name is <%=name %></div> -->
     <div class="title-label">What is this 2D girl's name?</div>
     <div class="parent-heart">
-        <% for(var i = 0; i < lifeLeft; i++){
-          %>
-          <img src="images/full-heart.png" alt="Full heart" class="heart"/>
-          <%
-        } 
-        for(var i = lifeLeft; i < originalLifeLeft; i++){
-          %>
-          <img src="images/empty-heart.png" alt="empty heart" class="heart"/>
-          <%
-        } %>
     </div>
 
-    <div><img src = "<%= imgSrc %>"></div>
-    <div class="guess"><% for(letter of guess){ if(letter === " "){%> &nbsp;&nbsp;&nbsp; <%} else{ %> <%= letter %> <%}}%></div>
+    <div><img src = "<%=imgSrc%>" class="char-pic"></div>
+    <div class="guess"></div>
+
     <% 
       var lettersLine1 = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
       var lettersLine2 = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
@@ -35,31 +30,27 @@
     %>
     
 
-    <form action="/guessing" method="POST" class="buttons">
-      <div class="key-container">
-      <% 
-        for(letterLine of lettersLine){
-          %> <div class="key-line"> <%
-          for(letter of letterLine){
-            %>     
-            <button type="submit" value= "<%= letter %>" name="choice" class="letter" id="<%= letter %>" <% if (chosenLetters.includes(letter)) { %> disabled <%} %>><%= letter %></button>
-            <%
-          }
-          %> </div> <%
+    <div class="key-container">
+    <% 
+      for(letterLine of lettersLine){
+        %> <div class="key-line"> <%
+        for(letter of letterLine){
+          %>     
+          <button class="letter" id="<%= letter %>"><%= letter %></button>
+          <%
         }
-      %>
-      </div>
+        %> </div> <%
+      }
+    %>
+    </div>
+
+    <form action="/result" method="POST" class="buttons">
+      <button type="submit" value="clear" name="result" id="clear"></button>
+      <button type="submit" value="over" name="result" id="over"></button>
     </form>
   </div>
 
-  <script>
-  window.addEventListener('load', () => {
-    if (locals.scrollTo) {
-      window.scrollTo(0, document.body.scrollHeight); 
-    }
-    });
-  </script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="button.js" charset="utf-8">
   </script>
 
