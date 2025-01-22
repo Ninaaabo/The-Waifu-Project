@@ -71,7 +71,7 @@ function aMove(b) {
 }
 
 buttons.forEach((b, index) => b.addEventListener("click", function(){
-    if(!clickedButtons.includes(b.getAttribute("id"))) {
+    if(lifeLeft > 0 && !clickedButtons.includes(b.getAttribute("id"))) {
         clickedButtons.push(b.getAttribute("id"));
         b.classList.add("clicked");
         aMove(b);
@@ -80,7 +80,7 @@ buttons.forEach((b, index) => b.addEventListener("click", function(){
 
 document.addEventListener("keydown", function(event){
     letters.forEach((letter) => {
-        if(!clickedButtons.includes(letter) && event.key.toLowerCase() === letter) {
+        if(lifeLeft > 0 && !clickedButtons.includes(letter) && event.key.toLowerCase() === letter) {
             var b = document.getElementById(event.key.toLowerCase());
             clickedButtons.push(letter);
             b.classList.toggle("clicked")
