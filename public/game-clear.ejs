@@ -14,11 +14,11 @@
 
     <div class="landing-container">
         <div class="title-label">You got it, her name is <span class="red"> <%= name%></span></div>
-        <form action="/difficulty" method="POST" class="buttons">
+        <form action="/difficulty" method="GET" class="buttons">
             <button type="submit">NEXT LEVEL</button>
         </form>
     </div>
-    <div><%=gif%></div>
+    <div><img src = "<%=gif%>" class="gif"></div>
 
 </body>
 </html>

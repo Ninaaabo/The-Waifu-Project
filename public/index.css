@@ -91,3 +91,11 @@ button:enabled:active, button:enabled.clicked{
     gap: 0.4em;
     font-size: 0px;
 }
+
+#clear{
+    display: none;
+}
+
+.gif{
+    margin-top: 40px;
+}

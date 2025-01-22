@@ -1,4 +1,3 @@
-alert("Yo");
 const letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var charName = document.getElementById('charName').getAttribute('data');
 var difficulty = document.getElementById('difficulty').getAttribute('data');
@@ -9,11 +8,12 @@ for(var i = 0; i < charName.length; i++){
 }
 
 var chosenLetters = [];
-var originalLifeLeft = (difficulty === "casual")? 15 : (difficulty === "lover")? 10 : 15;
+var originalLifeLeft = (difficulty === "casual")? 15 : (difficulty === "lover")? 10 : 5;
 var lifeLeft = originalLifeLeft;
 var heartShow = "";
 var buttons = document.querySelectorAll(".letter");
-
+const clickedButtons = [];
+var selfClick = true;
 
 aMove();
 function aMove(b) {
@@ -29,15 +29,23 @@ function aMove(b) {
             }
         }
 
-        if(isWrong) lifeLeft --;
+        if(isWrong) {
+            lifeLeft --;
+            if (lifeLeft !== 0)new Audio("./images/short-wrong.MP3").play();
+        }
+        
+        else if(guess.includes("_")) new Audio("./images/short-true.MP3").play();
+
 
         if(lifeLeft === 0){
-            level = 0;
+            selfClick = false;
             document.getElementById("over").click();
+            new Audio("./images/long-wrong.MP3").play();
         }
 
         if(!guess.includes("_")){
             document.getElementById("clear").click();
+            new Audio("./images/long-right.MP3").play();
         }
     }
 
@@ -62,17 +70,29 @@ function aMove(b) {
 
 }
 
-alert(charName);
-
-
-
+buttons.forEach((b, index) => b.addEventListener("click", function(){
+    if(!clickedButtons.includes(b.getAttribute("id"))) {
+        clickedButtons.push(b.getAttribute("id"));
+        b.classList.add("clicked");
+        aMove(b);
+     }
+}));
 
 document.addEventListener("keydown", function(event){
     letters.forEach((letter) => {
-        if(event.key.toLowerCase() === letter) {
+        if(!clickedButtons.includes(letter) && event.key.toLowerCase() === letter) {
             var b = document.getElementById(event.key.toLowerCase());
+            clickedButtons.push(letter);
             b.classList.toggle("clicked")
             aMove(b);
          }
     })
+})
+
+
+$("#over").click(function(){
+    if(self-click){
+        new Audio("./images/byebye.MP3").play();
+    }
+    selfClick = true;
 })
